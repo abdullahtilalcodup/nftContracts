@@ -33,7 +33,7 @@ contract NFTA is ERC721A, Ownable {
     uint256 public publicFreeLimit=20;
     uint256 public whitelistFreeLimit=30;
     uint256 public paidMinted=0;
-    uint256 public paidMintedLimit=30;
+    uint256 public paidMintedLimit=2;
 
     string public baseURI;
     string public baseExtension = ".json";
@@ -104,7 +104,7 @@ contract NFTA is ERC721A, Ownable {
 
             uint256 paidMint = _mintAmount - freeMintAvailable;
             require(senderAmount >= paidMint * cost,"Insuffiecient funds transfered");
-            require(paidMinted+paidMint<paidMintedLimit,"paid limit is exceded");
+            require(paidMinted+paidMint<=paidMintedLimit,"paid limit is exceded");
             _safeMint(msg.sender, _mintAmount);
             mintedList[msg.sender]+=_mintAmount;
             paidMinted=paidMinted+paidMint;

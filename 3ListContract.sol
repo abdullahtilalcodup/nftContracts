@@ -16,6 +16,8 @@ contract MM is ERC721A, Ownable {
     bool public paused = false;
     bool public revealed = false;
     bool public onlyWhiteListed = true;
+    bool public onlyWhiteListedOG = true;
+    bool public onlyWhiteList = true;
     bool public publicSale = true;//only specified here.Implemented if needed in future
     
     uint8 public maxMintAmount = 10; //Max Limit per Wallet
@@ -181,7 +183,8 @@ contract MM is ERC721A, Ownable {
     function preSaleMint(uint8 _mintAmount) preConditions(_mintAmount) public payable {
        
         require(onlyWhiteListed,"Pre sale is not active currently");
-       
+        require(onlyWhiteListedOG,"Pre sale OG is not active currently");
+
         uint256 ownerTokenCount = mintedList[msg.sender];
         require(_mintAmount+ownerTokenCount<= nftPerAddressLimitO,"Max lmit of tokens exceeded for Whitelists");
 
@@ -203,7 +206,8 @@ contract MM is ERC721A, Ownable {
     function preSaleMintLimited(uint8 _mintAmount) preConditions(_mintAmount) public payable {
        
         require(onlyWhiteListed,"Pre sale is not active currently");
-       
+        require(onlyWhiteList,"Pre sale WL is not active currently");
+
         uint256 ownerTokenCount = mintedList[msg.sender];
         require(_mintAmount+ownerTokenCount<= nftPerAddressLimitL,"Max lmit of tokens exceeded for Whitelists");
 

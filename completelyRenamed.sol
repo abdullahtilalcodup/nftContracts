@@ -14,7 +14,6 @@ contract MM is ERC721A, Ownable {
 
     bool public paused = false;
     bool public revealed = false;
-    bool public onlyWhiteListed = true;
     bool public onlyWhiteListedOG = true;
     bool public onlyWhiteList = true;
     bool public publicSale = true; //only specified here.Implemented if needed in future
@@ -277,12 +276,7 @@ contract MM is ERC721A, Ownable {
         _safeMint(msg.sender, _mintAmount);
     }
 
-    /// @notice it stops/resume the whitelisting minting process
-    /// @dev it is to stop/resume the whitelisting minting process.When passed false public mint will be open
-    /// @param _state is the boolean to whther resume or pause the whitelisting minting process or public mint.
-    function setOnlyWhiteListed(bool _state) public onlyOwner {
-        onlyWhiteListed = _state;
-    }
+   
 
     /// @notice check if the address is in whitelisted og list
     /// @dev use to check if address is in whitelisted og list

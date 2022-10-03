@@ -9,12 +9,14 @@ import "erc721a/contracts/ERC721A.sol";
 /// @title Mestro's Mix Test
 /// @author Adam Bawany
 /// @custom:experimental This is an experimental contract.
-contract NFTA is ERC721A, Ownable {
+contract MM is ERC721A, Ownable {
     using Strings for uint256;
 
     bool public paused = false;
     bool public revealed = false;
     bool public onlyWhiteListed = true;
+    bool public onlyWhiteListedOG = true;
+    bool public onlyWhiteList = true;
     bool public publicSale = true; //only specified here.Implemented if needed in future
 
     uint8 public MaxMintPerWallet = 10; //Max Limit per Wallet
@@ -178,12 +180,13 @@ contract NFTA is ERC721A, Ownable {
     /// @notice It is use to allow mint for the adresses added in whitelist
     /// @dev Since we have two whitelist,we calculate there free mint avialble depending on the whitelist and call the private mint function.Cannot break further as free mints are variable to type of sale
     /// @param _mintAmount is the quantity of tocken to mint
-    function preSaleMintOG(uint8 _mintAmount)
+    function OGMint(uint8 _mintAmount)
         public
         payable
         preConditions(_mintAmount)
     {
-        require(onlyWhiteListed, "Pre sale is not active currently");
+         
+        require(onlyWhiteListedOG,"OG mint is not active currently");
 
         uint256 ownerTokenCount = mintedList[msg.sender];
         require(
@@ -212,12 +215,13 @@ contract NFTA is ERC721A, Ownable {
     /// @notice It is use to allow mint for the adresses added in whitelist
     /// @dev Since we have two whitelist,we calculate there free mint avialble depending on the whitelist and call the private mint function.Cannot break further as free mints are variable to type of sale
     /// @param _mintAmount is the quantity of tocken to mint
-    function preSaleMint(uint8 _mintAmount)
+    function WLMint(uint8 _mintAmount)
         public
         payable
         preConditions(_mintAmount)
     {
-        require(onlyWhiteListed, "Pre sale is not active currently");
+           
+        require(onlyWhiteList,"WL mint is not active currently");
 
         uint256 ownerTokenCount = mintedList[msg.sender];
         require(

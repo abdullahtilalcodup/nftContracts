@@ -9,7 +9,7 @@ import "erc721a/contracts/ERC721A.sol";
 /// @title Mestro's Mix Test
 /// @author Adam Bawany
 /// @custom:experimental This is an experimental contract.
-contract NFTA is ERC721A, Ownable {
+contract MM is ERC721A, Ownable {
 
     using Strings for uint256;
     

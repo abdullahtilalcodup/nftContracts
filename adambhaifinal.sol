@@ -463,4 +463,31 @@ contract MaestrosMix By Adam Bawany is ERC721A, Ownable {
     {
         paidMintedLimit=paidMintLim;
     }
+    /// @notice it toggle the whitelistog
+    /// @dev it toggle the whitelistog
+    /// @param toggleWhitelistOG is the bool to toggle the whitelistog
+    function setWhiteListOG(bool toggleWhitelistOG)
+        public
+        onlyOwner
+    {
+        onlyWhiteListedOG=toggleWhitelistOG;
+    }
+    /// @notice it toggle the whitelist
+    /// @dev it toggle the whitelist
+    /// @param toggleWhitelist is the bool to toggle the whitelist
+    function setWhiteList(bool toggleWhitelist)
+        public
+        onlyOwner
+    {
+        onlyWhiteList=toggleWhitelist;
+    }
+    /// @notice it toggle the publicSale
+    /// @dev it toggle the publicsale
+    /// @param togglePublicSale is the bool to toggle the whitelist
+    function setPublicSale(bool togglePublicSale)
+        public
+        onlyOwner
+    {
+        publicSale=togglePublicSale;
+    }
 }

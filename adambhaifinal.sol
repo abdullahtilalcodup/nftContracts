@@ -9,16 +9,16 @@ import "erc721a/contracts/ERC721A.sol";
 /// @title Mestro's Mix Test
 /// @author Adam Bawany
 /// @custom:experimental This is an experimental contract.
-contract MM is ERC721A, Ownable {
+contract MaestrosMix By Adam Bawany is ERC721A, Ownable {
 
     using Strings for uint256;
     
-    bool public paused = false;
+    bool public paused = true; 
     bool public revealed = false;
-    bool public onlyWhiteListed = true;
-    bool public onlyWhiteListedOG = true;
-    bool public onlyWhiteList = true;
-    bool public publicSale = true;//only specified here.Implemented if needed in future
+    bool public onlyWhiteListed = false; //To pause both OG and WL 
+    bool public onlyWhiteListedOG = false; //To pause only OG
+    bool public onlyWhiteList = false; //To pause only WL
+    bool public publicSale = false; //To pause only public
     
     uint8 public maxMintAmount = 10; //Max Limit per Wallet
     uint8 public nftPerAddressLimitFreeO =2; //Max Free mint for WL
@@ -28,18 +28,19 @@ contract MM is ERC721A, Ownable {
     uint8 public nftPerAddressLimitFreePublic =1; //Max Free mint for Public
     uint8 public nftPerAddressLimitPublic =5; //Max Limit per Wallet for Public
     
-    uint256 public cost = 0.001 ether;
-    uint256 public maxSupply = 70;
-    uint256 public publicFreeMinted=0;//1000
-    uint256 public whitelistFreeMinted=0;//500
+    uint256 public cost = 0.0001 ether;
+    uint256 public maxSupply = 150;
+
+    uint256 public whitelistFreeMinted=0;
     uint256 public whitelistOFreeMinted=0;
     uint256 public whitelistLFreeMinted=0;
-    uint256 public publicFreeLimit=20;
-    uint256 public whitelistFreeLimit=30;
-    uint256 public whitelistOLimit=20;
-    uint256 public whitelistLLimit=10;
+    uint256 public publicFreeMinted=0;
     uint256 public paidMinted=0;
-    uint256 public paidMintedLimit=20;
+
+    uint256 public whitelistLLimit=20;
+    uint256 public whitelistOLimit=10;
+    uint256 public publicFreeLimit=40;
+    uint256 public paidMintedLimit=70;
 
     string public baseURI;
     string public baseExtension = ".json";
@@ -61,7 +62,7 @@ contract MM is ERC721A, Ownable {
         setNotRevealedURI(_initNotRevealedUri);
         addWhiteListAddresesO(whiteListAdresesO);
         addWhiteListAddresesL(whiteListAdresesL);
-    //    _safeMint(msg.sender, 5);
+        _safeMint(msg.sender, 10);
     }
 
     ///@notice some common conditions for public and pre sale that needs to be true like minting is not paused,amount to mint is greater than 0,supply dont exceed more than the total supply and sender dont exceed the max mint amount set
@@ -462,32 +463,4 @@ contract MM is ERC721A, Ownable {
     {
         paidMintedLimit=paidMintLim;
     }
-    /// @notice it toggle the whitelistog
-    /// @dev it toggle the whitelistog
-    /// @param toggleWhitelistOG is the bool to toggle the whitelistog
-    function setWhiteListOG(bool toggleWhitelistOG)
-        public
-        onlyOwner
-    {
-        onlyWhiteListedOG=toggleWhitelistOG;
-    }
-    /// @notice it toggle the whitelist
-    /// @dev it toggle the whitelist
-    /// @param toggleWhitelist is the bool to toggle the whitelist
-    function setWhiteList(bool toggleWhitelist)
-        public
-        onlyOwner
-    {
-        onlyWhiteList=toggleWhitelist;
-    }
-    /// @notice it toggle the publicSale
-    /// @dev it toggle the publicsale
-    /// @param togglePublicSale is the bool to toggle the whitelist
-    function setPublicSale(bool togglePublicSale)
-        public
-        onlyOwner
-    {
-        publicSale=togglePublicSale;
-    }
-    
 }

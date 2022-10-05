@@ -9,7 +9,7 @@ import "erc721a/contracts/ERC721A.sol";
 /// @title Mestro's Mix Test
 /// @author Adam Bawany
 /// @custom:experimental This is an experimental contract.
-contract MaestrosMix By Adam Bawany is ERC721A, Ownable {
+contract MaestrosMix is ERC721A, Ownable {
 
     using Strings for uint256;
     
@@ -42,9 +42,9 @@ contract MaestrosMix By Adam Bawany is ERC721A, Ownable {
     uint256 public publicFreeLimit=40;
     uint256 public paidMintedLimit=70;
 
-    string public baseURI;
+    string private baseURI;
     string public baseExtension = ".json";
-    string public notRevealedUri;
+    string private notRevealedUri;
 
     mapping(address => bool) whitelistedAddressesO;
     mapping(address => bool) whitelistedAddressesL;
@@ -491,5 +491,3 @@ contract MaestrosMix By Adam Bawany is ERC721A, Ownable {
         publicSale=togglePublicSale;
     }
 }
-
-

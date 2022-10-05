@@ -41,9 +41,9 @@ contract MaestrosMix By Adam Bawany is ERC721A, Ownable {
     uint256 public publicFreeLimit=40;
     uint256 public paidMintedLimit=70;
 
-    string public baseURI;
+    string private baseURI;
     string public baseExtension = ".json";
-    string public notRevealedUri;
+    string private notRevealedUri;
 
     mapping(address => bool) whitelistedAddressesO;
     mapping(address => bool) whitelistedAddressesL;
